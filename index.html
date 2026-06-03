@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesa Sound — Pricing</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: #faf9f7;
+      color: #2c2c2c;
+      padding: 40px 20px 80px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: normal;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #777;
+      font-style: italic;
+    }
+
+    .packages {
+      display: flex;
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e0dbd4;
+      border-radius: 10px;
+      padding: 36px 30px;
+      flex: 1;
+      min-width: 260px;
+      max-width: 300px;
+      position: relative;
+    }
+
+    .card.featured {
+      border-color: #b08d6a;
+      box-shadow: 0 4px 20px rgba(176, 141, 106, 0.15);
+    }
+
+    .badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #b08d6a;
+      color: #fff;
+      font-family: sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      font-weight: normal;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+
+    .price {
+      font-size: 2.6rem;
+      font-weight: bold;
+      color: #b08d6a;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .price-note {
+      font-size: 0.8rem;
+      color: #999;
+      font-family: sans-serif;
+      margin-bottom: 24px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e8e3dc;
+      margin-bottom: 20px;
+    }
+
+    .card ul {
+      list-style: none;
+      font-family: sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .card ul li {
+      padding: 5px 0;
+      padding-left: 22px;
+      position: relative;
+      color: #444;
+    }
+
+    .card ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #b08d6a;
+      font-weight: bold;
+    }
+
+    /* Extras section */
+    .extras {
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      background: #fff;
+      border: 1px solid #e0dbd4;
+      border-radius: 10px;
+      padding: 36px 40px;
+    }
+
+    .extras h3 {
+      font-size: 1.1rem;
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+
+    .extras-grid {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .extra-item {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .extra-item h4 {
+      font-family: sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #2c2c2c;
+      margin-bottom: 4px;
+    }
+
+    .extra-item p {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    .extra-item .contact-tag {
+      display: inline-block;
+      margin-top: 6px;
+      font-family: sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b08d6a;
+    }
+
+    footer {
+      text-align: center;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    footer a {
+      color: #b08d6a;
+      text-decoration: none;
+    }
+
+    .hero-img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      object-position: center 60%;
+      display: block;
+      margin-bottom: 0;
+    }
+
+    .hero-wrap {
+      max-width: 100%;
+      margin: -40px -20px 0;
+      overflow: hidden;
+    }
+
+    .pitch {
+      max-width: 680px;
+      margin: 60px auto 60px;
+      text-align: center;
+    }
+
+    .pitch h2 {
+      font-size: 1.9rem;
+      font-weight: normal;
+      color: #1a1a1a;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .pitch p {
+      font-family: sans-serif;
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .pitch p:last-child {
+      font-style: italic;
+      color: #888;
+      margin-bottom: 0;
+    }
+
+    .photo-pair {
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .photo-pair img {
+      width: 50%;
+      border-radius: 8px;
+      object-fit: cover;
+      max-height: 380px;
+    }
+
+    .live-sound-img {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      display: block;
+    }
+
+    .live-sound-img img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 680px) {
+      .card { max-width: 100%; }
+      .extras { padding: 28px 24px; }
+      .extras-grid { flex-direction: column; gap: 24px; }
+      .photo-pair { flex-direction: column; }
+      .photo-pair img { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero-wrap">
+    <img class="hero-img" src="images/20260530_204246.jpg" alt="Packed outdoor dance floor at a Mesa Sound event">
+  </div>
+
+  <header style="margin-top: 50px;">
+    <h1>Mesa Sound</h1>
+    <p>Professional DJ &amp; Audio Services &mdash; Mesa, Arizona</p>
+  </header>
+
+  <section class="pitch">
+    <h2>The most boring DJ you'll ever hire.</h2>
+    <p>I will never be the most exciting DJ in Mesa. But I will be there early, every time. I think through problems before they happen. I have backups for my backups. My setup looks clean and organized. I won't get drunk. I won't flirt with anyone's aunt. I'll clean up after myself.</p>
+    <p>I read the room, stay out of the spotlight, and make sure your event runs exactly the way you planned it — and gracefully when it doesn't.</p>
+    <p>Your wedding day has enough variables. Your DJ shouldn't be one of them.</p>
+  </section>
+
+  <div class="photo-pair">
+    <img src="images/20260425_175637.jpg" alt="Clean DJ and speaker setup in a backyard">
+    <img src="images/20260425_181906.jpg" alt="Organized DJ setup with wireless mic rack and laptop">
+  </div>
+
+  <div class="packages">
+
+    <div class="card">
+      <h2>Relaxed</h2>
+      <div class="price">$650</div>
+      <div class="price-note">Reception only</div>
+      <hr class="divider">
+      <ul>
+        <li>Professional PA system (EV mains &amp; subwoofers)</li>
+        <li>Background music — playlist or aux input</li>
+        <li>Wireless microphone available</li>
+        <li>Setup &amp; breakdown included</li>
+      </ul>
+    </div>
+
+    <div class="card featured">
+      <div class="badge">Most Popular</div>
+      <h2>Complete</h2>
+      <div class="price">$1,000</div>
+      <div class="price-note">Reception + dance party</div>
+      <hr class="divider">
+      <ul>
+        <li>Everything in Relaxed</li>
+        <li>Full DJ set — active mixing &amp; crowd reading</li>
+        <li>Chauvet GigBar MOVE light show</li>
+        <li>Moving heads, beams, laser &amp; strobe</li>
+        <li>MC &amp; announcements all evening</li>
+        <li>Satellite speakers for extended coverage</li>
+        <li>Bridal consultation</li>
+        <li>Detailed event timeline</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Unforgettable</h2>
+      <div class="price">$1,200</div>
+      <div class="price-note">Ring ceremony + reception + dance party</div>
+      <hr class="divider">
+      <ul>
+        <li>Everything in Complete</li>
+        <li>Officiant lavalier mic &amp; handheld mic</li>
+        <li>Processional &amp; recessional music</li>
+        <li>Rehearsal attendance</li>
+        <li>Live musician support — ceremony &amp; reception</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="live-sound-img">
+    <img src="images/20260307_154907.jpg" alt="Professional DJ setup under a wood pavilion with string lights">
+  </div>
+
+  <div class="live-sound-img">
+    <img src="images/20251205_203904.jpg" alt="Live sound mixing for an outdoor acoustic performance">
+  </div>
+
+  <div class="extras">
+    <h3>Also Available</h3>
+    <div class="extras-grid">
+
+      <div class="extra-item">
+        <h4>Live Sound Support</h4>
+        <p>Have a full band performing at your event? I can run professional front-of-house sound for your musicians. Let's talk about what you have in mind.</p>
+        <span class="contact-tag">Contact for quote</span>
+      </div>
+
+      <div class="extra-item">
+        <h4>Live Jazz Band</h4>
+        <p>A live jazz ensemble available for cocktail hours, receptions, and ceremonies. Perfect for couples who want something truly memorable. Subject to member availability.</p>
+        <span class="contact-tag">Contact for availability</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Questions? Call or text &nbsp;&middot;&nbsp; <a href="tel:+14805368648">(480) 536-8648</a></p>
+  </footer>
+
+</body>
+</html>
