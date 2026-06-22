@@ -281,12 +281,134 @@
       border-radius: 8px;
     }
 
+    .how-it-works {
+      max-width: 680px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    .how-it-works h2 {
+      font-size: 1.5rem;
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin-bottom: 32px;
+    }
+
+    .steps {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 140px;
+      max-width: 160px;
+    }
+
+    .step-number {
+      font-family: sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #b08d6a;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-family: sans-serif;
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .contact-form {
+      max-width: 520px;
+      margin: 0 auto 60px;
+      background: #fff;
+      border: 1px solid #e0dbd4;
+      border-radius: 10px;
+      padding: 36px 40px;
+    }
+
+    .contact-form h3 {
+      font-size: 1.1rem;
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .contact-form .subtitle {
+      font-family: sans-serif;
+      font-size: 0.9rem;
+      color: #777;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .contact-form label {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #444;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e0dbd4;
+      border-radius: 6px;
+      font-family: sans-serif;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      background: #faf9f7;
+    }
+
+    .contact-form textarea {
+      height: 80px;
+      resize: vertical;
+    }
+
+    .contact-form button {
+      width: 100%;
+      padding: 12px;
+      background: #b08d6a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+    }
+
+    .contact-form button:hover { background: #9a7a5a; }
+
+    .contact-form .form-msg {
+      text-align: center;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      margin-top: 12px;
+      display: none;
+    }
+
     @media (max-width: 680px) {
       .card { max-width: 100%; }
       .extras { padding: 28px 24px; }
       .extras-grid { flex-direction: column; gap: 24px; }
       .photo-pair { flex-direction: column; }
       .photo-pair img { width: 100%; }
+      .contact-form { padding: 28px 24px; }
+      .steps { gap: 24px; }
     }
   </style>
 </head>
@@ -312,6 +434,28 @@
     <img src="images/20260425_175637.jpg" alt="Clean DJ and speaker setup in a backyard">
     <img src="images/20260425_181906.jpg" alt="Organized DJ setup with wireless mic rack and laptop">
   </div>
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <p>Tell me about your event — date, venue, and vibe.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <p>I'll send you a custom quote within 24 hours.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <p>We'll chat to nail down the details.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <p>Lock in your date with a deposit. Done.</p>
+      </div>
+    </div>
+  </section>
 
   <div class="packages">
 
@@ -388,9 +532,55 @@
     </div>
   </div>
 
+  <section class="contact-form" id="contact">
+    <h3>Get Started</h3>
+    <p class="subtitle">Drop your info and I'll get back to you within a day.</p>
+    <form id="lead-form">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      <label for="date">Event Date</label>
+      <input type="date" id="date" name="date">
+      <label for="details">Tell me about your event</label>
+      <textarea id="details" name="details" placeholder="Venue, vibe, guest count — whatever you know so far"></textarea>
+      <button type="submit">Send It</button>
+      <p class="form-msg" id="form-msg"></p>
+    </form>
+  </section>
+
   <footer>
     <p>Questions? <a href="tel:+14805368648">Call</a> or <a href="sms:+14805368648">text</a> (480) 536-8648</p>
   </footer>
 
+  <script>
+    document.getElementById('lead-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const msg = document.getElementById('form-msg');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      try {
+        const data = Object.fromEntries(new FormData(e.target));
+        const res = await fetch('https://boringdj-form.michael-badgett.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          msg.style.display = 'block';
+          msg.style.color = '#b08d6a';
+          msg.textContent = "Got it! I'll be in touch soon.";
+          e.target.reset();
+        } else { throw new Error(); }
+      } catch {
+        msg.style.display = 'block';
+        msg.style.color = '#c44';
+        msg.textContent = 'Something went wrong. Text me at (480) 536-8648 instead.';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Send It';
+    });
+  </script>
 </body>
 </html>
