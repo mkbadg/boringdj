@@ -15,25 +15,13 @@ export default {
         return new Response('Name and email required', { status: 400, headers: corsHeaders() });
       }
 
-      const emailBody = [
-        `New lead from boringdj.com`,
-        ``,
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Event Date: ${date || 'Not specified'}`,
-        `Details: ${details || 'None provided'}`,
-      ].join('\n');
-
-      await fetch('https://api.mailchannels.net/tx/v1/send', {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbxvbHMAGq8hEtCx0ujZRmKulWm1KwZvXbdXWrXy4ZbTpo3k2SmmAcaGhH8nkWHh2S91/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          personalizations: [{ to: [{ email: 'michael.badgett@gmail.com' }] }],
-          from: { email: 'noreply@boringdj.com', name: 'Mesa Sound Leads' },
-          subject: `New lead: ${name}`,
-          content: [{ type: 'text/plain', value: emailBody }],
-        }),
+        body: JSON.stringify({ name, email, date, details }),
       });
+
+      if (!res.ok) throw new Error();
 
       return new Response(JSON.stringify({ ok: true }), {
         headers: { 'Content-Type': 'application/json', ...corsHeaders() },
